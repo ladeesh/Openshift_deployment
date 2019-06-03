@@ -8,4 +8,4 @@ GUID=`hostname|awk -F. '{print $2}'`
 sed -i "s/GUID/$GUID/g" /etc/ansible/hosts
 ###Deploy Openshift Cluster
 echo "************************* Deploying the Openshift Cluster****************************"
-ansible-playbook homework.yaml
+ansible-playbook cluster_deploy.yaml
