@@ -1,0 +1,35 @@
+---
+- name: Make sure nfs package installed
+  hosts: nfs
+  tasks:
+    - name: required packages are present
+      yum:
+        name:
+          - nfs-utils
+        state: present
+
+- name: Create PVs for Users
+  hosts: nfs
+  tasks:
+    - name: Create pV
+      script: ../scripts/create_pvs.sh
+    - name: Restarting NFS Server...
+      shell: systemctl restart nfs-server
+
+- name: Create 25 definitions files for PVs 5G size
+  hosts: localhost
+  tasks:
+    - name: Create pV
+      script: ../scripts/pvs_5Gsize.sh
+
+- name: Create 25 definitions files for PVs 10G size
+  hosts: localhost
+  tasks:
+    - name: Create pV
+      script: ../scripts/pvs_10Gsize.sh
+
+- name: Create all PVs from definitions files
+  hosts: localhost
+  tasks:
+    - name: Create pV
+      script: ../scripts/pvs_def.sh
