@@ -1,0 +1,19 @@
+---
+- name: Copy the system:admin certificate in the bastion 
+  hosts: masters[0]
+  tasks:
+    - name: Copy files
+      fetch:
+        src: /root/.kube/config
+        dest: /root/.kube/config
+        flat: yes
+
+- name: Smoke Test
+  hosts: localhost
+  tasks:
+    - name: Login as system admin
+      shell: oc login -u system:admin > /dev/null
+    - name: Create Project
+      shell: oc new-project smoke-test
+    - name: Create App
+      shell: oc new-app nodejs-mongo-persistent

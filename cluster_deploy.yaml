@@ -8,6 +8,9 @@
 - name: Call the prerequisites and deploy_cluster ansible playbooks
   import_playbook: ./playbooks/030_install.yaml
 
+- name: Post Install 
+  import_playbook: ./playbooks/040_post_install.yaml
+
 - name: Create PVs
   import_playbook: ./playbooks/050_create_pvs.yaml
 
