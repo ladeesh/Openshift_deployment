@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Copy a new hosts file to /etc/ansible/hosts"
-cp Openshift_deployment/hosts /etc/ansible/hosts
+cp -f hosts /etc/ansible/hosts
 
 echo "Set the current GUID to generate the inventory"
 GUID=`hostname|awk -F. '{print $2}'`
